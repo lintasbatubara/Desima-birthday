@@ -15,7 +15,6 @@ import { useState, useEffect } from 'react';
 import {
   Crown,
   Sparkles,
-  Heart,
   ChevronRight,
   ChevronLeft,
   Cake,
@@ -27,8 +26,6 @@ import {
   Star,
   Flame,
   Send,
-  Check,
-  Copy,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import PetalsCanvas from './components/PetalsCanvas';
@@ -41,8 +38,8 @@ const CHAPTERS = [
   { id: 0, title: 'Pembukaan', icon: Crown },
   { id: 1, title: 'Doa & Harapan', icon: Star },
   { id: 2, title: 'Tiup Lilin', icon: Cake },
-  { id: 3, title: 'Galeri Putri', icon: Camera },
-  { id: 4, title: 'Surat Manis', icon: Mail },
+  { id: 3, title: 'Princess Gallery', icon: Camera },
+  { id: 4, title: 'Pesan', icon: Mail },
   { id: 5, title: 'Balas Pesan', icon: MessageCircle },
 ];
 
@@ -59,14 +56,12 @@ export default function App() {
 
   // Letter state
   const [letterOpen, setLetterOpen] = useState(false);
-  const [copiedLetter, setCopiedLetter] = useState(false);
 
-  // WhatsApp reply state
-  const [waNumber, setWaNumber] = useState('');
+  // WhatsApp reply state - Direct to 082179417423
+  const [waNumber] = useState('082179417423');
   const [waMessage, setWaMessage] = useState(
-    'Halo! Makasih banyak yaa atas web ucapan ulang tahunnya, manis banget! Desima terharu dan bahagia banget hari ini 👑💖'
+    'Halo! Makasih banyak yaa atas ucapan ulang tahunnya'
   );
-  const [copiedWA, setCopiedWA] = useState(false);
 
   const triggerSparkles = () => {
     royalAudio.playSparkle();
@@ -131,29 +126,6 @@ export default function App() {
     window.open(url, '_blank');
   };
 
-  const letterBody = `Untuk Sang Putri, Desima Triana Grey Tindaon...
-
-Selamat ulang tahun ya, Desima! 👑✨
-
-Hari ini adalah hari yang sangat istimewa, karena di hari inilah dunia menyambut kehadiran sosok perempuan luar biasa yang bernama Desima Triana Grey Tindaon.
-
-Mungkin hari-hari berlalu begitu cepat dengan segala kesibukan masing-masing, tapi di hari ulang tahunmu ini, aku ingin kamu tahu betapa berharga dan berartinya dirimu. Des, senyummu itu punya keajaiban tersendiri—selalu menularkan keceriaan dan bikin suasana di sekitarmu jadi jauh lebih hangat dan hidup.
-
-Desima bukan cuma perempuan yang cantik dan anggun seperti putri di cerita dongeng, tapi kamu punya hati yang begitu tulus, telinga yang mau mendengar, dan jiwa tangguh yang tidak mudah menyerah. Terima kasih ya sudah menjadi teman yang begitu baik dan berharga bagi kami.
-
-Di usia yang baru ini, doa tulus selalu kupanjatkan untukmu:
-Semoga Desima panjang umur, senantiasa diberikan kesehatan yang sempurna, rezeki yang melimpah dan berkah, serta kebahagiaan hati tanpa akhir. Semoga setiap impian, cita-cita, dan target masa depanmu dimudahkan jalannya oleh Tuhan.
-
-Tetaplah jadi Des yang selalu ceria, ramah, dan bersinar. Kamu terlahir untuk mengenakan mahkota kebaikan ini, Princess Desima!
-
-Selamat Ulang Tahun, Des! 💖🎂`;
-
-  const copyLetterText = () => {
-    navigator.clipboard.writeText(letterBody);
-    setCopiedLetter(true);
-    setTimeout(() => setCopiedLetter(false), 2000);
-  };
-
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#fbf4f2] via-[#fff5f6] to-[#fbf1f4] text-slate-800 flex flex-col items-center justify-center p-0 sm:p-4 select-none overflow-x-hidden">
       {/* Background Animated Tangled Sky Lanterns */}
@@ -162,7 +134,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
       {/* Background Animated Flower Petals */}
       <PetalsCanvas interactive={false} />
 
-      {/* Floating Tangled Music Button (Top-Right) */}
+      {/* Floating Tangled Music Button (Top-Right, clean without text) */}
       <TangledMusicButton />
 
       {/* Main Responsive Mobile / Tablet Frame Container */}
@@ -220,7 +192,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
               {/* Title Lockup */}
               <div className="space-y-2">
                 <span className="font-cinzel text-xs tracking-widest uppercase text-amber-800 font-bold bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
-                  A Royal Fairytale Celebration
+                  A Royal Princess Celebration
                 </span>
                 <h1 className="font-vibes text-4xl sm:text-5xl text-rose-600 leading-tight">
                   Happy Birthday
@@ -229,19 +201,8 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                   Desima Triana Grey Tindaon
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 font-serif leading-relaxed px-2 pt-1">
-                  Sebuah persembahan istimewa untuk merayakan hari kelahiran Tuan Putri yang penuh pesona, kebaikan, dan senyuman manis.
+                  Sebuah persembahan istimewa untuk merayakan hari kelahiran Princess yang penuh pesona, kebaikan, dan senyuman manis.
                 </p>
-              </div>
-
-              {/* Tangled Music Callout */}
-              <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3 text-xs text-amber-900 flex items-center gap-2.5 text-left shadow-xs">
-                <div className="w-8 h-8 rounded-full bg-amber-200/70 flex items-center justify-center shrink-0">
-                  <Sparkles className="w-4 h-4 text-amber-700" />
-                </div>
-                <div>
-                  <p className="font-semibold">Lagu Latar: Tangled - I See The Light</p>
-                  <p className="text-[11px] text-amber-700">Sentuh tombol di bawah untuk memulai cerita & melodi piano romantis 🎵</p>
-                </div>
               </div>
 
               {/* Start CTA Button */}
@@ -249,7 +210,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                 onClick={handleStartStory}
                 className="w-full py-3.5 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold rounded-full shadow-lg shadow-rose-200/80 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
               >
-                <span>Mulai Kisah Sang Putri ✨</span>
+                <span>Start a Story ✨</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -258,9 +219,9 @@ Selamat Ulang Tahun, Des! 💖🎂`;
           {/* ================= STEP 1: UCAPAN & DOA (ROYAL WISHES) ================= */}
           {currentStep === 1 && (
             <div className="space-y-5 my-auto animate-in fade-in slide-in-from-right duration-400 max-w-sm">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100/70 text-rose-800 text-xs font-semibold">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100/80 text-rose-800 text-xs font-semibold shadow-2xs">
                 <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-300" />
-                <span>Doa Tulus Untuk Sang Putri</span>
+                <span>Doa & Harapan untuk Princess Desima</span>
               </div>
 
               {/* Floating Princess Castle / Fairytale Graphic */}
@@ -275,29 +236,29 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                   <span className="text-rose-600">Desima Triana Grey Tindaon!</span>
                 </h3>
 
-                {/* Sincere Wishes List */}
-                <div className="bg-white/80 border border-rose-100 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 space-y-2.5 text-left font-serif leading-relaxed shadow-sm">
-                  <p className="flex items-start gap-2">
-                    <span className="text-rose-500 text-base leading-none">🌸</span>
-                    <span><strong>Semoga Panjang Umur:</strong> Diberikan usia yang penuh berkah, keselamatan, dan kebermanfaatan dalam setiap tarikan napas.</span>
+                {/* Sincere Wishes List - Justified, no bold, no colon */}
+                <div className="bg-white/85 border border-rose-100 rounded-2xl p-4 sm:p-5 text-xs sm:text-sm text-slate-700 space-y-3 font-serif shadow-sm">
+                  <p className="flex items-start gap-2.5 text-justify">
+                    <span className="text-rose-500 text-base leading-none shrink-0 pt-0.5">🌸</span>
+                    <span className="leading-relaxed">Semoga panjang umur, diberikan usia yang penuh berkah, keselamatan, dan kebermanfaatan bagi orang lain di setiap langkahnya.</span>
                   </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-amber-500 text-base leading-none">✨</span>
-                    <span><strong>Sehat Selalu:</strong> Senantiasa dilimpahi fisik yang bugar, hati yang tenang, dan pikiran yang selalu damai, Des.</span>
+                  <p className="flex items-start gap-2.5 text-justify">
+                    <span className="text-amber-500 text-base leading-none shrink-0 pt-0.5">✨</span>
+                    <span className="leading-relaxed">Senantiasa diberikan kesehatan, kekuatan, hati yang tenang, dan pikiran yang selalu damai ya, Des.</span>
                   </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-pink-500 text-base leading-none">💖</span>
-                    <span><strong>Bahagia Selalu:</strong> Semoga setiap harimu dipenuhi tawa renyah, kehangatan cinta, dan orang-orang baik yang menyayangimu dengan tulus.</span>
+                  <p className="flex items-start gap-2.5 text-justify">
+                    <span className="text-pink-500 text-base leading-none shrink-0 pt-0.5">💖</span>
+                    <span className="leading-relaxed">Semoga setiap harimu selalu dipenuhi tawa, bahagia, cinta, dan orang-orang baik yang menyayangimu dengan tulus.</span>
                   </p>
-                  <p className="flex items-start gap-2">
-                    <span className="text-emerald-500 text-base leading-none">🌟</span>
-                    <span><strong>Cita-cita Tercapai:</strong> Semoga semua impian besar dan rencana masa depan Desima dibuka jalannya dengan seluas-luasnya.</span>
+                  <p className="flex items-start gap-2.5 text-justify">
+                    <span className="text-emerald-500 text-base leading-none shrink-0 pt-0.5">🌟</span>
+                    <span className="leading-relaxed">Semoga impian dan rencana besar Desima dibuka jalannya seluas-luasnya dan bisa cepat terwujud.</span>
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs text-rose-700 font-medium italic">
-                "Tetaplah menjadi Des yang ceria, tangguh, dan selalu membawa kebaikan!"
+              <p className="text-xs sm:text-sm text-rose-700 font-medium italic text-center px-2">
+                "Tetaplah menjadi Desima yang ceria, tangguh, dan selalu membawa kebaikan!"
               </p>
             </div>
           )}
@@ -307,7 +268,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
             <div className="space-y-4 my-auto animate-in fade-in slide-in-from-right duration-400 max-w-sm">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/70 text-amber-800 text-xs font-semibold">
                 <Cake className="w-3.5 h-3.5 text-amber-600" />
-                <span>Kue Ulang Tahun Sang Putri</span>
+                <span>Kue Ulang Tahun Princess</span>
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold font-playfair text-slate-800">
@@ -317,41 +278,175 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                 Pikirkan doa dan harapan terindahmu dalam hati, lalu sentuh kuenya untuk meniup lilin ya, Des!
               </p>
 
-              {/* Interactive SVG Cake */}
+              {/* Interactive SVG Cake with Princess Figurine Topper */}
               <div
                 onClick={handleBlowCandle}
-                className="relative mx-auto cursor-pointer p-4 rounded-3xl bg-gradient-to-b from-rose-50/50 to-amber-50/30 border border-rose-200/80 shadow-md hover:scale-102 transition-transform select-none"
+                className="relative mx-auto cursor-pointer p-4 rounded-3xl bg-gradient-to-b from-rose-50/60 via-pink-50/40 to-amber-50/40 border border-rose-200/90 shadow-lg hover:scale-102 transition-transform select-none"
                 title="Sentuh untuk meniup lilin"
               >
-                <svg viewBox="0 0 280 220" className="w-56 sm:w-64 h-auto mx-auto filter drop-shadow">
-                  {/* Plate */}
-                  <ellipse cx="140" cy="200" rx="100" ry="14" fill="#e2e8f0" />
-                  <ellipse cx="140" cy="198" rx="88" ry="10" fill="#cbd5e1" />
+                <svg viewBox="0 0 280 270" className="w-60 sm:w-68 h-auto mx-auto filter drop-shadow">
+                  {/* Plate / Cake Stand */}
+                  <ellipse cx="140" cy="254" rx="112" ry="12" fill="#e2e8f0" />
+                  <ellipse cx="140" cy="251" rx="98" ry="9" fill="#cbd5e1" />
 
-                  {/* Bottom tier */}
-                  <rect x="65" y="140" width="150" height="55" rx="10" fill="#fed7aa" />
-                  <path d="M 65 155 Q 85 168 105 155 Q 125 168 145 155 Q 165 168 185 155 Q 200 168 215 155 L 215 140 L 65 140 Z" fill="#fb7185" />
+                  {/* Tier 1 (Bottom Tier) */}
+                  <rect x="52" y="185" width="176" height="64" rx="12" fill="#fed7aa" />
+                  <path
+                    d="M 52 202 Q 74 217 96 202 Q 118 217 140 202 Q 162 217 184 202 Q 206 217 228 202 L 228 185 L 52 185 Z"
+                    fill="#fb7185"
+                  />
+                  {/* Rose & pearl accents on bottom tier */}
+                  <circle cx="75" cy="228" r="4.5" fill="#f43f5e" />
+                  <circle cx="107" cy="228" r="4" fill="#fbbf24" />
+                  <circle cx="140" cy="228" r="5" fill="#f43f5e" />
+                  <circle cx="173" cy="228" r="4" fill="#fbbf24" />
+                  <circle cx="205" cy="228" r="4.5" fill="#f43f5e" />
 
-                  {/* Top tier */}
-                  <rect x="90" y="95" width="100" height="48" rx="8" fill="#fbcfe8" />
-                  <path d="M 90 108 Q 115 120 140 108 Q 165 120 190 108 L 190 95 L 90 95 Z" fill="#f43f5e" />
+                  {/* Tier 2 (Top Tier) */}
+                  <rect x="80" y="130" width="120" height="58" rx="10" fill="#fbcfe8" />
+                  <path
+                    d="M 80 144 Q 100 157 120 144 Q 140 157 160 144 Q 180 157 200 144 L 200 130 L 80 130 Z"
+                    fill="#f472b6"
+                  />
+                  {/* Pearls on top tier */}
+                  <circle cx="100" cy="165" r="3.5" fill="#fb7185" />
+                  <circle cx="120" cy="165" r="3" fill="#fbbf24" />
+                  <circle cx="140" cy="165" r="4" fill="#fb7185" />
+                  <circle cx="160" cy="165" r="3" fill="#fbbf24" />
+                  <circle cx="180" cy="165" r="3.5" fill="#fb7185" />
 
-                  {/* Tiny Crown Topper */}
-                  <path d="M 126 93 L 132 83 L 140 88 L 148 83 L 154 93 Z" fill="#fbbf24" stroke="#b45309" strokeWidth="1" />
+                  {/* Figurine Pedestal on Top of Cake */}
+                  <ellipse cx="140" cy="130" rx="30" ry="6" fill="#fef08a" stroke="#d97706" strokeWidth="0.8" />
+                  <rect x="134" y="123" width="12" height="7" fill="#fbbf24" rx="1" />
+                  <ellipse cx="140" cy="123" rx="22" ry="4.5" fill="#fde047" stroke="#d97706" strokeWidth="0.8" />
 
-                  {/* Center Candle */}
-                  <rect x="137" y="58" width="6" height="36" rx="2" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.8" />
-                  <line x1="140" y1="58" x2="140" y2="52" stroke="#475569" strokeWidth="1.2" />
+                  {/* ================= PRINCESS FIGURINE (FIGURA PRINCESS) ================= */}
+                  <g className="filter drop-shadow-sm">
+                    {/* Princess Flowing Hair (Back) */}
+                    <path
+                      d="M 132 46 C 120 48 116 70 120 88 C 122 92 125 90 125 86 C 122 72 125 54 133 46 Z"
+                      fill="#b45309"
+                    />
+                    <path
+                      d="M 148 46 C 160 48 164 70 160 88 C 158 92 155 90 155 86 C 158 72 155 54 147 46 Z"
+                      fill="#b45309"
+                    />
 
-                  {/* Animated Flame or Smoke */}
+                    {/* Princess Ballgown Skirt */}
+                    <path
+                      d="M 133 76 C 130 88 114 110 118 122 C 124 125 156 125 162 122 C 166 110 150 88 147 76 Z"
+                      fill="#f43f5e"
+                    />
+                    {/* Skirt Central Pastel Ruffle / Drape */}
+                    <path
+                      d="M 135 78 C 133 88 124 108 129 120 C 136 122 144 122 151 120 C 156 108 147 88 145 78 Z"
+                      fill="#fda4af"
+                    />
+                    {/* Golden Gown Hem & Sparkle accents */}
+                    <path
+                      d="M 119 122 Q 140 126 161 122"
+                      stroke="#fbbf24"
+                      strokeWidth="1.5"
+                      fill="none"
+                    />
+                    <circle cx="140" cy="100" r="1.5" fill="#fef08a" />
+                    <circle cx="134" cy="110" r="1.2" fill="#fef08a" />
+                    <circle cx="146" cy="110" r="1.2" fill="#fef08a" />
+
+                    {/* Bodice */}
+                    <path
+                      d="M 133 62 C 133 57 147 57 147 62 L 145 77 L 135 77 Z"
+                      fill="#fb7185"
+                    />
+                    <circle cx="140" cy="69" r="1.8" fill="#fbbf24" stroke="#d97706" strokeWidth="0.5" />
+
+                    {/* Puff Sleeves */}
+                    <ellipse cx="131" cy="64" rx="4" ry="3.5" fill="#fbcfe8" />
+                    <ellipse cx="149" cy="64" rx="4" ry="3.5" fill="#fbcfe8" />
+
+                    {/* Slender Royal Arms */}
+                    <path
+                      d="M 131 65 Q 125 74 134 76"
+                      stroke="#fde68a"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    <path
+                      d="M 149 65 Q 155 74 146 76"
+                      stroke="#fde68a"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+
+                    {/* Neck */}
+                    <rect x="138" y="54" width="4" height="4" fill="#fde68a" />
+
+                    {/* Head & Smiling Face */}
+                    <circle cx="140" cy="48" r="8.5" fill="#fef3c7" stroke="#fde68a" strokeWidth="0.5" />
+                    {/* Blushing cheeks */}
+                    <circle cx="135" cy="50" r="1.6" fill="#fda4af" opacity="0.8" />
+                    <circle cx="145" cy="50" r="1.6" fill="#fda4af" opacity="0.8" />
+                    {/* Eyes */}
+                    <path d="M 134 47 Q 136 45 138 47" stroke="#831843" strokeWidth="1" strokeLinecap="round" fill="none" />
+                    <path d="M 142 47 Q 144 45 146 47" stroke="#831843" strokeWidth="1" strokeLinecap="round" fill="none" />
+                    {/* Smile */}
+                    <path d="M 138.5 51 Q 140 53.5 141.5 51" stroke="#e11d48" strokeWidth="1" strokeLinecap="round" fill="none" />
+
+                    {/* Princess Crown Front Hair Bangs */}
+                    <path
+                      d="M 131 46 C 135 41 145 41 149 46 C 147 43 143 43 140 45 C 137 43 133 43 131 46 Z"
+                      fill="#92400e"
+                    />
+
+                    {/* Golden Princess Tiara / Crown */}
+                    <path
+                      d="M 133 40 L 136 32 L 140 36 L 144 32 L 147 40 Z"
+                      fill="#fbbf24"
+                      stroke="#b45309"
+                      strokeWidth="0.8"
+                    />
+                    <circle cx="140" cy="36" r="1.2" fill="#ec4899" />
+                    <circle cx="136" cy="32" r="0.9" fill="#38bdf8" />
+                    <circle cx="144" cy="32" r="0.9" fill="#38bdf8" />
+
+                    {/* Magic Sparkles around Figurine */}
+                    <text x="112" y="60" fontSize="12" className="animate-pulse select-none">✨</text>
+                    <text x="156" y="60" fontSize="12" className="animate-pulse select-none" style={{ animationDelay: '0.4s' }}>✨</text>
+                  </g>
+
+                  {/* ================= BIRTHDAY CANDLES FLANKING THE PRINCESS FIGURINE ================= */}
+                  {/* Left Candle */}
+                  <rect x="94" y="90" width="6" height="42" rx="2" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.8" />
+                  <line x1="97" y1="90" x2="97" y2="83" stroke="#475569" strokeWidth="1.2" />
+
+                  {/* Right Candle */}
+                  <rect x="180" y="90" width="6" height="42" rx="2" fill="#fed7aa" stroke="#ea580c" strokeWidth="0.8" />
+                  <line x1="183" y1="90" x2="183" y2="83" stroke="#475569" strokeWidth="1.2" />
+
+                  {/* Animated Flames or Smoke */}
                   {!cakeBlown ? (
-                    <g className="animate-pulse" style={{ transformOrigin: '140px 48px' }}>
-                      <path d="M 140 38 C 146 45 145 53 140 54 C 135 53 134 45 140 38 Z" fill="#f59e0b" />
-                      <circle cx="140" cy="48" r="2.5" fill="#fef08a" />
-                    </g>
+                    <>
+                      {/* Left Flame */}
+                      <g className="animate-pulse" style={{ transformOrigin: '97px 78px' }}>
+                        <path d="M 97 68 C 103 75 102 83 97 84 C 92 83 91 75 97 68 Z" fill="#f59e0b" />
+                        <circle cx="97" cy="78" r="2.5" fill="#fef08a" />
+                      </g>
+                      {/* Right Flame */}
+                      <g className="animate-pulse" style={{ animationDelay: '0.3s', transformOrigin: '183px 78px' }}>
+                        <path d="M 183 68 C 189 75 188 83 183 84 C 178 83 177 75 183 68 Z" fill="#f59e0b" />
+                        <circle cx="183" cy="78" r="2.5" fill="#fef08a" />
+                      </g>
+                    </>
                   ) : (
+                    /* Smoke trails when candles blown */
                     <g className="text-slate-400 opacity-70">
-                      <path d="M 140 50 Q 134 40 144 32 Q 148 24 140 16" stroke="#94a3b8" strokeWidth="1.8" fill="none" strokeDasharray="2,2" />
+                      <path d="M 97 80 Q 91 70 101 62 Q 105 54 97 46" stroke="#94a3b8" strokeWidth="1.6" fill="none" strokeDasharray="2,2" />
+                      <path d="M 183 80 Q 177 70 187 62 Q 191 54 183 46" stroke="#94a3b8" strokeWidth="1.6" fill="none" strokeDasharray="2,2" />
+                      {/* Celebration hearts popping around the princess figurine */}
+                      <text x="105" y="42" fontSize="11" className="animate-bounce">💖</text>
+                      <text x="162" y="42" fontSize="11" className="animate-bounce" style={{ animationDelay: '0.2s' }}>🌸</text>
                     </g>
                   )}
                 </svg>
@@ -383,24 +478,18 @@ Selamat Ulang Tahun, Des! 💖🎂`;
             </div>
           )}
 
-          {/* ================= STEP 3: GALERI FOTO SANG PUTRI ================= */}
+          {/* ================= STEP 3: PRINCESS GALLERY (HALAMAN 4) ================= */}
           {currentStep === 3 && (
             <div className="w-full my-auto animate-in fade-in slide-in-from-right duration-400">
-              {/* Pure Photo Showcase */}
               <StoryGallery />
             </div>
           )}
 
-          {/* ================= STEP 4: SURAT PERSONAL YANG MANIS ================= */}
+          {/* ================= STEP 4: PESAN BUAT DESIMA (HALAMAN 5) ================= */}
           {currentStep === 4 && (
             <div className="space-y-4 my-auto animate-in fade-in slide-in-from-right duration-400 max-w-sm">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100/70 text-rose-800 text-xs font-semibold">
-                <Mail className="w-3.5 h-3.5 text-rose-500" />
-                <span>Surat Kerajaan dari Sahabat</span>
-              </div>
-
               <h3 className="text-xl sm:text-2xl font-bold font-playfair text-slate-800">
-                Sepucuk Surat untuk Des
+                Pesan Buat Desima
               </h3>
 
               {/* Sealed Envelope / Unfolded Parchment */}
@@ -418,10 +507,10 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                     </button>
                     <div>
                       <p className="font-playfair font-bold text-slate-800 text-base">
-                        Surat Tertutup Segel Lilin Mahkota
+                        Pesan Buat Desima
                       </p>
                       <p className="text-xs text-slate-500 mt-1">
-                        Sentuh segel di atas untuk membuka dan membaca pesan personal yang manis ini.
+                        Sentuh segel di atas untuk membuka dan membaca pesan personal ini.
                       </p>
                     </div>
                     <button
@@ -431,42 +520,26 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                       }}
                       className="px-4 py-2 bg-rose-50 text-rose-800 border border-rose-200 rounded-full text-xs font-semibold hover:bg-rose-100 transition-colors cursor-pointer"
                     >
-                      Buka Surat 💌
+                      Buka Pesan 💌
                     </button>
                   </div>
                 ) : (
                   <div className="space-y-3 animate-in fade-in duration-300">
-                    <div className="flex items-center justify-between border-b border-amber-200/60 pb-2">
+                    <div className="border-b border-amber-200/60 pb-2">
                       <span className="font-vibes text-2xl text-rose-600">Dear Desima,</span>
-                      <button
-                        onClick={copyLetterText}
-                        className="text-[11px] text-slate-500 hover:text-slate-800 flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-md"
-                      >
-                        {copiedLetter ? (
-                          <>
-                            <Check className="w-3 h-3 text-emerald-600" />
-                            <span className="text-emerald-700">Tersalin</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3 h-3" />
-                            <span>Salin</span>
-                          </>
-                        )}
-                      </button>
                     </div>
 
                     <div className="max-h-64 overflow-y-auto pr-1 text-xs sm:text-[13px] font-serif text-slate-700 leading-relaxed space-y-2.5">
-                      <p>
+                      <p className="text-left">
                         <strong className="text-rose-900">Selamat ulang tahun ya, Desima! 👑✨</strong>
                       </p>
-                      <p>
+                      <p className="text-justify">
                         Hari ini adalah hari yang sangat istimewa untukmu, <strong>Desima Triana Grey Tindaon</strong>. Terima kasih sudah selalu menjadi teman yang begitu berharga dan berhati hangat.
                       </p>
-                      <p>
+                      <p className="text-justify">
                         <em>Des</em>, senyummu selalu punya energi ajaib yang sanggup menceriakan suasana. Tetaplah jadi sosok yang ceria, ramah, dan tangguh!
                       </p>
-                      <p>
+                      <p className="text-justify">
                         Semoga panjang umur, sehat selalu, bahagia selalu, dan setiap doa baikmu segera terwujud. Happy Birthday, Princess Desima! 💖🎂
                       </p>
                     </div>
@@ -476,38 +549,23 @@ Selamat Ulang Tahun, Des! 💖🎂`;
             </div>
           )}
 
-          {/* ================= STEP 5: BALAS PESAN KE WHATSAPP (FINAL) ================= */}
+          {/* ================= STEP 5: BALAS PESAN KE WHATSAPP (HALAMAN 6) ================= */}
           {currentStep === 5 && (
             <div className="space-y-4 my-auto animate-in fade-in slide-in-from-right duration-400 max-w-sm w-full">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Kirim Balasan ke WhatsApp</span>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-bold font-playfair text-slate-800">
-                Kirim Balasan Manis
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Desima bisa langsung mengirimkan ucapan terima kasih atau balasan pesan ini langsung ke WhatsApp pembuat web!
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                Desima bisa langsung mengirimkan pesan balasan ke WhatsApp
               </p>
 
               {/* Message Box */}
               <div className="space-y-2 text-left bg-white border border-emerald-200/90 rounded-2xl p-3.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs text-slate-500">
                   <label htmlFor="wa-text" className="font-semibold text-slate-700 text-[11px]">
-                    Isi Pesan Balasan Desima:
+                    Isi Pesan Balasan:
                   </label>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(waMessage);
-                      setCopiedWA(true);
-                      setTimeout(() => setCopiedWA(false), 2000);
-                    }}
-                    className="text-emerald-700 hover:text-emerald-800 flex items-center gap-1 text-[11px] font-medium"
-                  >
-                    {copiedWA ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedWA ? 'Tersalin' : 'Salin'}</span>
-                  </button>
+                  <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <MessageCircle className="w-3 h-3 text-emerald-600 fill-emerald-600/30" />
+                    WhatsApp
+                  </span>
                 </div>
 
                 <textarea
@@ -517,21 +575,6 @@ Selamat Ulang Tahun, Des! 💖🎂`;
                   onChange={(e) => setWaMessage(e.target.value)}
                   className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-slate-800"
                 />
-
-                {/* Optional Phone Number */}
-                <div className="pt-1">
-                  <label htmlFor="wa-target-number" className="block text-[11px] text-slate-500">
-                    Nomor WhatsApp Tujuan (opsional):
-                  </label>
-                  <input
-                    id="wa-target-number"
-                    type="text"
-                    placeholder="Contoh: 08123456789 atau kosongkan"
-                    value={waNumber}
-                    onChange={(e) => setWaNumber(e.target.value)}
-                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-slate-800"
-                  />
-                </div>
               </div>
 
               {/* Big Direct WhatsApp Button */}
@@ -561,7 +604,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
           )}
         </main>
 
-        {/* Persistent Bottom Navigation Controls (Bukan memanjang ke bawah) */}
+        {/* Persistent Bottom Navigation Controls */}
         <footer className="px-4 py-3 bg-white/90 border-t border-rose-100/90 backdrop-blur-md flex items-center justify-between shrink-0">
           {/* Previous Button */}
           <button

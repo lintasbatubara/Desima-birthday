@@ -65,7 +65,7 @@ Selamat Ulang Tahun, Des! 💖🎂`;
           <p className="text-xs text-slate-500 mt-1 max-w-sm">
             {isOpen
               ? 'Surat kerajaan telah dibuka. Bacalah pesan tulus ini dengan senyuman.'
-              : 'Klik segel lilin mahkota di atas untuk membuka pesan personal yang manis.'}
+              : 'Klik segel lilin mahkota di atas untuk membuka pesan personal.'}
           </p>
 
           <button

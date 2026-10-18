@@ -70,7 +70,7 @@ export default function InteractiveCake() {
       </div>
 
       <h3 className="text-2xl md:text-3xl font-bold font-playfair text-slate-800">
-        Kue Ulang Tahun Sang Putri
+        Kue Ulang Tahun Princess
       </h3>
       <p className="text-xs md:text-sm text-slate-600 mt-1 max-w-md mx-auto">
         Tutup mata sejenak, buat harapan terindahmu dalam hati, lalu tiup lilinnya ya, Des!

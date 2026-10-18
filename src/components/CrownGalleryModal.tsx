@@ -28,7 +28,7 @@ const DEFAULT_PHOTOS: PrincessPhoto[] = [
   {
     id: 'photo-1',
     url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80',
-    title: 'Senyuman Sang Tuan Putri',
+    title: 'Senyuman Sang Princess',
     caption: 'Des, senyumanmu selalu punya energi ajaib yang sanggup menerangi ruangan tergelap sekalipun. Tetaplah tersenyum manis seperti ini ya!',
     tag: 'Momen Paling Manis',
   },

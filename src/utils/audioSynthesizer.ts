@@ -89,7 +89,7 @@ class TangledAudioPlayer {
 
   public play() {
     this.initAudio();
-    if (this.audio) {
+    if (this.audio && this.audio.paused) {
       this.audio.play().then(() => {
         this.isPlaying = true;
         this.notify();
