@@ -1,0 +1,6 @@
+{
+  "name": "Princess Desima's Royal Birthday",
+  "description": "Web ucapan ulang tahun interaktif bertema princess untuk Desima Triana Grey Tindaon dengan musik piano romantis, kelopak bunga jatuh, galeri mahkota, dan pesan WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
